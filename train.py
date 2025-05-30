@@ -103,7 +103,7 @@ if __name__ == "__main__":
     train_dataset = CellCropsDataset(train_crops, transform=training_transform, mask=True)
     val_dataset = CellCropsDataset(val_crops, transform=val_transform(crop_input_size), mask=True)
     train_dataset_for_eval = CellCropsDataset(train_crops, transform=val_transform(crop_input_size), mask=True)
-    device = "cuda"
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
     num_channels = sum(1 for line in open(config["channels_path"])) + 1 - len(config["blacklist"])
     class_num = config["num_classes"]
 

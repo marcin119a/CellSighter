@@ -58,7 +58,7 @@ if __name__ == "__main__":
                             blacklist_channels=config["blacklist"])
     crop_input_size = config["crop_input_size"] if "crop_input_size" in config else 100
     val_dataset = CellCropsDataset(val_crops, transform=val_transform(crop_input_size), mask=True)
-    device = "cuda"
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
     num_channels = sum(1 for line in open(config["channels_path"])) + 1 - len(config["blacklist"])
     class_num = config["num_classes"]
 
